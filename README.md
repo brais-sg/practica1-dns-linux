@@ -26,4 +26,39 @@ Para esto, vamos a dividir la configuración en dos ficheros: ```named.conf.loca
 
 El fichero ```named.conf.local``` contendrá la configuración de las zonas del DNS y el fichero ```named.conf.options``` las opciones del servidor bind9
 
+En el archivo de configuración principal, debemos incluir los otros dos:
+```
+include "/etc/bind/named.conf.options";
+include "/etc/bind/named.conf.local";
+```
+
+Tras esto, configuramos las opciones de bind9 en ```named.conf.options```
+```conf
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+            8.8.8.8;
+            8.8.4.4;
+        };
+        forward only;
+
+        listen-on { any; };
+        listen-on-v6 { any; };
+        allow-query {
+            any;
+        };
+};
+```
+
+Posteriormente, configuramos una zona en el fichero ```named.conf.local```
+```conf
+zone "asircastelao.int" {
+        type master;
+        file "/var/lib/bind/db.asircastelao.int";
+        allow-query {
+            any;
+        };
+};
+```
 
