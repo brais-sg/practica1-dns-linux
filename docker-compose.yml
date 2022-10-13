@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  asir_bind9:
+    container_name: asir_bind9
+    image: internetsystemsconsortium/bind9:9.16
+    networks:
+      bind9_subnet:
+        ipv4_address: 10.1.0.254
+    volumes:
+      - /home/asir2a/bind9/conf:/etc/bind
+      - /home/asir2a/bind9/zonas:/var/lib/bind
+  asir_cliente:
+    container_name: asir_cliente
+    image: alpine
+    networks:
+      - bind9_subnet
+    stdin_open: true
+    tty: true
+    dns:
+      - 10.1.0.254 # Esto es el DNS a usar
+networks:
+  bind9_subnet:
+    external: true
