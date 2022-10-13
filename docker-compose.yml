@@ -7,8 +7,8 @@ services:
       bind9_subnet:
         ipv4_address: 10.1.0.254
     volumes:
-      - /home/asir2a/bind9/conf:/etc/bind
-      - /home/asir2a/bind9/zonas:/var/lib/bind
+      - /home/asir2a/practica1-dns-linux/conf:/etc/bind
+      - /home/asir2a/practica1-dns-linux/zonas:/var/lib/bind
   asir_cliente:
     container_name: asir_cliente
     image: alpine
