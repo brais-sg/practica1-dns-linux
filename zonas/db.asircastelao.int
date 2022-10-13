@@ -10,6 +10,11 @@ $TTL    3600
 @       IN      A       10.1.0.2
 
 ns      IN      A       10.1.0.254
+
+mail    IN      MX      10.1.0.2
 test    IN      A       10.1.0.2
+
  
 alias   IN      CNAME   test
+correo  IN      CNAME   mail
+text    IN      TXT     "Esta es una entrada de texto"

@@ -62,3 +62,13 @@ zone "asircastelao.int" {
 };
 ```
 
+# Modificando el fichero con la zona
+Para esto, creamos dentro de zona el fichero ```db.asircastelao.int``` referenciado previamente desde ```named.conf.local```
+
+En este fichero, definiremos todos los registros para la zona db.asircastelao.int
+
+```conf
+
+
+
+```
