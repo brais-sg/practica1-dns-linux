@@ -68,7 +68,25 @@ Para esto, creamos dentro de zona el fichero ```db.asircastelao.int``` referenci
 En este fichero, definiremos todos los registros para la zona db.asircastelao.int
 
 ```conf
+$TTL    3600
+@       IN      SOA     ns.asircastelao.int. a.asircastelao.int. (
+                   2022051001           ; Serial
+                         3600           ; Refresh [1h]
+                          600           ; Retry   [10m]
+                        86400           ; Expire  [1d]
+                          600 )         ; Negative Cache TTL [1h]
+;
+@       IN      NS      ns.asircastelao.int.
+@       IN      A       10.1.0.2
 
+ns      IN      A       10.1.0.254
 
+mail    IN      MX      10.1.0.2
+test    IN      A       10.1.0.2
 
+ 
+alias   IN      CNAME   test
+correo  IN      CNAME   mail
+text    IN      TXT     "Esta es una entrada de texto"
 ```
+
