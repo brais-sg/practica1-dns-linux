@@ -90,3 +90,36 @@ correo  IN      CNAME   mail
 text    IN      TXT     "Esta es una entrada de texto"
 ```
 
+# Creando la red externa para conectar ambas máquinas
+Para esto debemos utilizar el comando ```docker network create``` para crear la red, donde nuestro DNS será la máquina que eligiremos como la puerta de enlace
+
+
+# Configurando el docker-compose y lanzando ambos contenedores
+Creamos el siguiente archivo ```docker-compose.yml```
+
+```
+version: "3.3"
+services:
+  asir_bind9:
+    container_name: asir_bind9
+    image: internetsystemsconsortium/bind9:9.16
+    networks:
+      bind9_subnet:
+        ipv4_address: 10.1.0.254
+    volumes:
+      - /home/asir2a/practica1-dns-linux/conf:/etc/bind
+      - /home/asir2a/practica1-dns-linux/zonas:/var/lib/bind
+  asir_cliente:
+    container_name: asir_cliente
+    image: alpine
+    networks:
+      - bind9_subnet
+    stdin_open: true
+    tty: true
+    dns:
+      - 10.1.0.254 # Esto es el DNS a usar
+networks:
+  bind9_subnet:
+    external: true
+```
+
